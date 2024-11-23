@@ -6,10 +6,10 @@ from utils import get_sports_odds
 
 
 def send_email(subject, body, receivers):
-    sender_email = "huksdnpoladj@gmail.com"
+    sender_email = "-" #Paste sender email here, this is set up for gmail
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
-    password = "xrrl hsie dcoa cnvx"
+    password = "-" #Paste app password here
 
     
     msg = MIMEMultipart()
@@ -92,7 +92,7 @@ def display_sports_odds(api_key):
 
 
 def main():
-    api_key = "9bb7695b152ab3b28b432ae63f8feb4b"
+    api_key = "-" #Paste API key here
     while True:
         print("Checking for arbitrage opportunities across all sports...")
         display_sports_odds(api_key)
