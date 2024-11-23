@@ -7,8 +7,8 @@ from utils import get_sports_odds
 
 def send_email(subject, body, receivers):
     sender_email = "-" #Paste sender email here, this is set up for gmail
-    smtp_server = "smtp.gmail.com"
-    smtp_port = 587
+    smtp_server = "smtp.gmail.com" #configured for gmail
+    smtp_port = 587 #configured for gmail
     password = "-" #Paste app password here
 
     
@@ -62,13 +62,13 @@ def display_sports_odds(api_key):
                     
                     roi = (1 / arbitrage_decimal - 1) * 100
                     
-                    if arbitrage_decimal < 1:
+                    if arbitrage_decimal < 1: #can change arbitrage_decimal for roi to scan for roi above a threshold
                         print(f"ARBITRAGE OPPORTUNITY FOUND! ({sport_name})")
                         print(f"  ROI: {roi:.2f}%")
                         print(f"  Match: {home_team} vs {away_team}")
 
                         
-                        total_stake = 100  
+                        total_stake = 100 # change to alter hypothetical stake, this will also change the stakes calculated and sent via email
                         for outcome_name, details in best_odds.items():
                             stake = (total_stake / details['price']) / arbitrage_decimal
                             print(f"  Stake for {outcome_name}: ${stake:.2f} (Bookmaker: {details['bookmaker']})")
