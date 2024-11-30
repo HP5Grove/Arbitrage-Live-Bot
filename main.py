@@ -5,11 +5,11 @@ from email.mime.multipart import MIMEMultipart
 from utils import get_sports_odds
 
 
-def send_email(subject, body, receivers):
-    sender_email = "-" #Paste sender email here, this is set up for gmail
-    smtp_server = "smtp.gmail.com" #configured for gmail
-    smtp_port = 587 #configured for gmail
-    password = "-" #Paste app password here
+def send_email(subject, body, receivers): #Input individualised sender email, the smtp server adress (this will depend on the email provider), and app password
+    sender_email = "" 
+    smtp_server = ""
+    smtp_port = 587 
+    password = "" 
 
     
     msg = MIMEMultipart()
@@ -21,7 +21,7 @@ def send_email(subject, body, receivers):
         with smtplib.SMTP(smtp_server, smtp_port) as server:
             server.starttls()
             server.login(sender_email, password)
-            msg['To'] = "-".join(receivers) #paste email in for -
+            msg['To'] = "".join(receivers) #paste email within quotation
             server.sendmail(sender_email, receivers, msg.as_string())
             print("Email sent successfully!")
     except Exception as e:
@@ -62,7 +62,7 @@ def display_sports_odds(api_key):
                     
                     roi = (1 / arbitrage_decimal - 1) * 100
                     
-                    if arbitrage_decimal < 1: #can change arbitrage_decimal for roi to scan for roi above a threshold
+                    if roi > 1: #Change value based upon what ROI threshold wanted
                         print(f"ARBITRAGE OPPORTUNITY FOUND! ({sport_name})")
                         print(f"  ROI: {roi:.2f}%")
                         print(f"  Match: {home_team} vs {away_team}")
@@ -82,7 +82,7 @@ def display_sports_odds(api_key):
                             body += f"Stake for {outcome_name}: ${stake:.2f} (Best odds: {details['price']} - Bookmaker: {details['bookmaker']})\n"
 
                             
-                            receivers = ["-"] #paste your email here
+                            receivers = [""] #paste your email here
 
                         send_email(subject, body, receivers)
                         print("\n")
@@ -92,7 +92,7 @@ def display_sports_odds(api_key):
 
 
 def main():
-    api_key = "-" #Paste API key here
+    api_key = "" #Paste API key here
     while True:
         print("Checking for arbitrage opportunities across all sports...")
         display_sports_odds(api_key)
